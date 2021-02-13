@@ -1,4 +1,5 @@
 fn main() {
+    // TODO abstract this to function / module - more elegant solution?
     let hang_pics = [
         "  +---+
   |   |
@@ -51,6 +52,7 @@ fn main() {
 ========="];
 
     print_ascii_title();
+    // TODO pick phrases from random list of phrases.
     let phrase = "To err is human; to forgive, divine.";
     let mut miss_count = 0;
     for c in phrase.as_bytes().iter() {
