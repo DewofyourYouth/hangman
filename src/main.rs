@@ -5,16 +5,12 @@ use rand::Rng;
 
 fn main() {
     let filename = "src/phrases.txt";
-    // Open the file in read-only mode (ignoring errors).
     let file = File::open(filename).unwrap();
     let reader = BufReader::new(file);
     let mut phrases: Vec<String> = Vec::new();
-    // Read the file line by line using the lines() iterator from std::io::BufRead.
     for line in reader.lines() {
-        let line = line.unwrap(); // Ignore errors.
-        // Show the line and its number.
+        let line = line.unwrap();
         phrases.push(line);
-        // println!("{}. {}", index + 1, line);
     }
     let num = rand::thread_rng().gen_range(0..phrases.len() - 1);
     // TODO abstract this to function / module - more elegant solution?
