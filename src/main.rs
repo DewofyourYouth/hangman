@@ -101,11 +101,13 @@ fn main() {
         let mut ans_vec: Vec<i32> = Vec::new();
         // let mut solved = false;
         for c in phrase.as_bytes().iter() {
-            if guess_vector.contains(&c.to_ascii_lowercase()) || *c < 65 || *c > 122 {
-                print!("{}", *c as char);
-            } else {
-                ans_vec.push(1);
-                print!("_");
+            match *c as char {
+                _ if guess_vector.contains(&c.to_ascii_lowercase()) => print!("{}", *c as char),
+                _ if *c < 65 || *c > 122 => print!("{}", *c as char),
+                _ => {
+                    ans_vec.push(1);
+                    print!("_") }
+
             }
         }
         print!("\n");
