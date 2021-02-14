@@ -66,7 +66,6 @@ fn main() {
 ========="];
 
     print_ascii_title();
-    // TODO pick phrases from random list of phrases.
     let phrase = &phrases[num];
     let mut miss_count = 0;
     println!("
