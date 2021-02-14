@@ -55,6 +55,7 @@ fn main() {
     // TODO pick phrases from random list of phrases.
     let phrase = "To err is human; to forgive, divine.";
     let mut miss_count = 0;
+    println!("Secret Phrase:");
     for c in phrase.as_bytes().iter() {
         if *c < 122 && *c > 65 {
             print!("_");
@@ -62,7 +63,6 @@ fn main() {
             print!("{}", *c as char);
         }
     }
-    print!("\n");
    print_ascii_prompt();
     let mut guess_vector = Vec::new();
     loop {
