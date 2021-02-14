@@ -1,4 +1,22 @@
+use std::fs::File;
+use std::io::{BufRead, BufReader};
+
+use rand::Rng;
+
 fn main() {
+    let filename = "src/phrases.txt";
+    // Open the file in read-only mode (ignoring errors).
+    let file = File::open(filename).unwrap();
+    let reader = BufReader::new(file);
+    let mut phrases: Vec<String> = Vec::new();
+    // Read the file line by line using the lines() iterator from std::io::BufRead.
+    for line in reader.lines() {
+        let line = line.unwrap(); // Ignore errors.
+        // Show the line and its number.
+        phrases.push(line);
+        // println!("{}. {}", index + 1, line);
+    }
+    let num = rand::thread_rng().gen_range(0..phrases.len() - 1);
     // TODO abstract this to function / module - more elegant solution?
     let hang_pics = [
         "  +---+
@@ -53,9 +71,13 @@ fn main() {
 
     print_ascii_title();
     // TODO pick phrases from random list of phrases.
-    let phrase = "To err is human; to forgive, divine.";
+    let phrase = &phrases[num];
     let mut miss_count = 0;
-    println!("Secret Phrase:");
+    println!("
+===================================================================================================
+    Secret Phrase:
+
+    ");
     for c in phrase.as_bytes().iter() {
         if *c < 122 && *c > 65 {
             print!("_");
@@ -63,7 +85,10 @@ fn main() {
             print!("{}", *c as char);
         }
     }
-   print_ascii_prompt();
+    println!("
+
+===================================================================================================");
+    print_ascii_prompt();
     let mut guess_vector = Vec::new();
     loop {
         let mut guess = String::new();
@@ -96,10 +121,10 @@ fn main() {
         }
 
         if miss_count == hang_pics.len() - 1 {
-           print_ascii_lose();
+            print_ascii_lose();
             break;
         } else {
-          print_ascii_prompt();
+            print_ascii_prompt();
         }
     }
 }
@@ -122,7 +147,7 @@ fn print_ascii_title() {
 ");
 }
 
-fn print_ascii_lose(){
+fn print_ascii_lose() {
     println!("
 
 
@@ -140,7 +165,7 @@ fn print_ascii_lose(){
 ");
 }
 
-fn print_ascii_win(){
+fn print_ascii_win() {
     println!("
 
 
@@ -158,7 +183,7 @@ fn print_ascii_win(){
 ");
 }
 
-fn print_ascii_prompt(){
+fn print_ascii_prompt() {
     println!("
 
  +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+
