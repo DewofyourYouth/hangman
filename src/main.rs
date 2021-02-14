@@ -101,7 +101,6 @@ fn main() {
         let mut ans_vec: Vec<i32> = Vec::new();
         // let mut solved = false;
         for c in phrase.as_bytes().iter() {
-            // TODO this should probably be done with match, but I haven't been able to get it to work
             if guess_vector.contains(&c.to_ascii_lowercase()) || *c < 65 || *c > 122 {
                 print!("{}", *c as char);
             } else {
