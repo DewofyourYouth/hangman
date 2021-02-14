@@ -74,8 +74,8 @@ fn main() {
 
     ");
     for c in phrase.as_bytes().iter() {
-        match *c {
-            _ if *c < 122 && *c > 64 => print!("_"),
+        match *c as char {
+            'A'..='Z' | 'a'..='z' => print!("_"),
             _ => print!("{}", *c as char),
         };
     }
