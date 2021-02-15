@@ -5,7 +5,7 @@ use ansi_term::{Colour, Style};
 use rand::Rng;
 
 fn main() {
-    let phrases_src = "src/phrases.txt";
+    let phrases_src = "src/proverbs_of_solomon.txt";
     let phrases_file = File::open(phrases_src).unwrap();
     let reader = BufReader::new(phrases_file);
     let mut phrases: Vec<String> = Vec::new();
