@@ -1,12 +1,13 @@
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 
+use ansi_term::{Colour, Style};
 use rand::Rng;
 
 fn main() {
-    let filename = "src/phrases.txt";
-    let file = File::open(filename).unwrap();
-    let reader = BufReader::new(file);
+    let phrases_src = "src/phrases.txt";
+    let phrases_file = File::open(phrases_src).unwrap();
+    let reader = BufReader::new(phrases_file);
     let mut phrases: Vec<String> = Vec::new();
     for line in reader.lines() {
         let line = line.unwrap();
@@ -97,12 +98,12 @@ fn main() {
         if !phrase.contains(g as char) {
             miss_count += 1;
         }
-        println!("{}", hang_pics[miss_count]);
+        println!("{}", Colour::Purple.paint(hang_pics[miss_count]));
         let mut ans_vec: Vec<i32> = Vec::new();
         // let mut solved = false;
         for c in phrase.as_bytes().iter() {
             match c {
-                _ if guess_vector.contains(&c.to_ascii_lowercase()) => print!("{}", *c as char),
+                _ if guess_vector.contains(&c.to_ascii_lowercase()) => print!("{}", Style::new().bold().paint((*c as char).to_string())),
                 _ if *c < 65 || *c > 122 => print!("{}", *c as char),
                 _ => {
                     ans_vec.push(1);
@@ -126,7 +127,7 @@ fn main() {
 }
 
 fn print_ascii_title() {
-    println!("
+    let title = "
 
                                                                                     .         .
 8 8888        8          .8.          b.             8      ,o888888o.             ,8.       ,8.                   .8.          b.             8
@@ -149,11 +150,12 @@ fn print_ascii_title() {
                                                                             .. |                   .|....'
                                                                              ''
 
-");
+";
+    println!("{}", Colour::Cyan.paint(title));
 }
 
 fn print_ascii_lose() {
-    println!("
+    let lose = "
 
 
 `8.`8888.      ,8'     ,o888888o.     8 8888      88           8 8888             ,o888888o.        d888888o.   8888888 8888888888
@@ -167,11 +169,12 @@ fn print_ascii_lose() {
        8 8888       ` 8888     ,88'     8888   ,d8P            8 8888          ` 8888     ,88'   `8b.  ;8.`8888       8 8888
        8 8888          `8888888P'        `Y88888P'             8 888888888888     `8888888P'      `Y8888P ,88P'       8 8888
 
-");
+";
+    println!("{}", Colour::Red.paint(lose));
 }
 
 fn print_ascii_win() {
-    println!("
+    let win = "
 
 
 `8.`8888.      ,8'     ,o888888o.     8 8888      88           `8.`888b                 ,8'     ,o888888o.     b.             8
@@ -185,16 +188,18 @@ fn print_ascii_win() {
        8 8888       ` 8888     ,88'     8888   ,d8P                    `8.`8' `8,`'          ` 8888     ,88'   8         `Y8o.`
        8 8888          `8888888P'        `Y88888P'                      `8.`   `8'              `8888888P'     8            `Yo
 
-");
+";
+    println!("{}", Colour::Green.paint(win));
 }
 
 fn print_ascii_prompt() {
-    println!("
+    let prompt = "
 
  +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+
                 Guess a letter
  +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+ +-+
 
-")
+";
+    println!("{}", Colour::Yellow.paint(prompt));
 }
 
