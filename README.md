@@ -1,5 +1,5 @@
 # hangman
-![terminal screenshot](./ksnip_20210214-173735.png)
+![terminal screenshot](./hangman_screenshot.png)
 
 A simple terminal based hangman game in Rust
 
