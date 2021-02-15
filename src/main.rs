@@ -64,16 +64,19 @@ fn main() {
  /|\\  |   LOSE!!!!
  / \\  |   >:-P
       |
-========="];
+=========",
+    ];
 
     print_ascii_title();
     let phrase = &phrases[num];
     let mut miss_count = 0;
-    println!("
+    println!(
+        "
 ===================================================================================================
     Secret Phrase:
 
-    ");
+    "
+    );
     for c in phrase.as_bytes().iter() {
         match *c as char {
             'A'..='Z' | 'a'..='z' => print!("_"),
@@ -103,7 +106,9 @@ fn main() {
         // let mut solved = false;
         for c in phrase.as_bytes().iter() {
             match c {
-                _ if guess_vector.contains(&c.to_ascii_lowercase()) => print!("{}", Style::new().bold().paint((*c as char).to_string())),
+                _ if guess_vector.contains(&c.to_ascii_lowercase()) => {
+                    print!("{}", Style::new().bold().paint((*c as char).to_string()))
+                }
                 _ if *c < 65 || *c > 122 => print!("{}", *c as char),
                 _ => {
                     ans_vec.push(1);
@@ -202,4 +207,3 @@ fn print_ascii_prompt() {
 ";
     println!("{}", Colour::Yellow.paint(prompt));
 }
-
